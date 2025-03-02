@@ -1,5 +1,6 @@
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import logo from '../assets/img/logo.png'
+import WeatherWidget from "./WeatherWidget.tsx";
 
 const Navbar = () => {
   return (
@@ -17,6 +18,7 @@ const Navbar = () => {
         <li><Link to="/players">Tienda</Link></li>
         <li><Link to="/players">Contacto</Link></li>
       </ul>
+      <WeatherWidget />
     </nav>
   )
 }

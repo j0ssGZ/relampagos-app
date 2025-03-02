@@ -1,15 +1,17 @@
 // Shared
-@import "./shared/_global.scss";
-@import "./shared/_variables.scss";
-@import "./shared/_fonts.scss";
+@use "./shared/base";
+@use "./shared/normalize";
+@use "./shared/global";
 
-// Components
-@import "./components/_navbar.scss";
+//// Components
+@use "./components/matchs-banner";
+@use "./components/navbar";
+@use "./components/weather-widget";
 
-// Pages
-@import "./pages/_home.scss";
+//// Partials
+@use "./partials/footer";
+@use "./partials/header";
+@use "./partials/layout";
 
-// Partials
-@import "./partials/_footer.scss";
-@import "./partials/_header.scss";
-@import "./partials/_layout.scss";
+//// Pages
+@use "./pages/home";

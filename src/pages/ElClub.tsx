@@ -1,6 +1,10 @@
 const ElClub = () => {
   return (
-    <p>Here is El Club</p>
+    <div className="el-club layout layout__full-height">
+      <section className="layout__full_height">
+        El club
+      </section>
+    </div>
   )
 }
 

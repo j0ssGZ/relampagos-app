@@ -1,8 +1,9 @@
+@use '../shared/variables' as *;
+
 .navbar {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 10px;
   width: 100%;
 }
 
@@ -20,21 +21,13 @@
 }
 
 .nav-list a {
-  color: $color-main-text;
+  color: $body-font-color;
   text-decoration: none;
   font-size: 18px;
   letter-spacing: 0.25px;
 }
 
-.toggle-button {
-  display: none;
-  background-color: transparent;
-  border: none;
-  font-size: 24px;
-  cursor: pointer;
-}
-
-@media (max-width: 980px) {
+@media (max-width: $size-lg) {
   .nav-list {
     flex-direction: column;
     width: 100%;

@@ -1,0 +1,10 @@
+@use '../shared/variables' as *;
+
+.layout {
+  padding: 152px 10% 0;
+  line-height: $line-height;
+
+  @media screen and (max-width: $size-sm) {
+    padding-top: 100px;
+  }
+}

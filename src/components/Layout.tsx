@@ -1,10 +1,10 @@
 import {Outlet} from "react-router-dom"
-import Navbar from "./NavBar.tsx"
+import Header from "./Header.tsx";
 
 const Layout = () => {
   return (
     <>
-      <Navbar/>
+      <Header/>
       <Outlet/>
     </>
   )

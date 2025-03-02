@@ -1,21 +1,29 @@
-import './App.css'
 import {BrowserRouter, Route, Routes} from "react-router-dom";
-import "./assets/style/_app.scss"
 import Layout from "./components/Layout.tsx";
 import Home from "./pages/Home.tsx";
 import ElClub from "./pages/ElClub.tsx";
+import './assets/style/_app.scss';
+import UnderConstruction from "./components/UnderConstruction.tsx";
+import { useState } from "react";
 
 function App() {
+  // const isDevelopment = process.env.NODE_ENV === 'development'
+  const showApp = useState(false)
+
   return (
     <>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Layout />}>
-            <Route index element={<Home />} />
-            <Route path="el-club" element={<ElClub />} />
-          </Route>
-        </Routes>
-      </BrowserRouter>
+      {showApp ? (
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Layout />}>
+              <Route index element={<Home />} />
+              <Route path="el-club" element={<ElClub />} />
+            </Route>
+          </Routes>
+        </BrowserRouter>
+      ) : (
+        <UnderConstruction />
+      )}
     </>
   )
 }
