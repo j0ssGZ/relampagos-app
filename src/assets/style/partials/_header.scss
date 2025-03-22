@@ -1,6 +1,9 @@
+@use '../shared/variables' as *;
+
 .header {
   position: fixed;
   width: 100%;
+  z-index: $zindex-1;
 
   .logo {
     height: 6em;

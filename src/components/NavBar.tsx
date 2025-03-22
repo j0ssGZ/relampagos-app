@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import logo from '../assets/img/logo.png'
+import logo from '../assets/img/logo-relampagos.svg'
 import WeatherWidget from "./WeatherWidget.tsx";
 
 const Navbar = () => {
@@ -23,7 +23,7 @@ const Navbar = () => {
       </nav>
       <nav className="navbar navbar-mobile">
         <div className="navbar-mobile-item">
-          Área privada
+          <span className="hide-on-menu-mobile-active">Área privada</span>
         </div>
         <div className="navbar-mobile-item">
           <Link to="/">
@@ -34,7 +34,7 @@ const Navbar = () => {
           <span id={"menu-toggler"}>Menú</span>
         </div>
       </nav>
-      <div className="navbar-mobile-menu">
+      <div id="navbar-mobile-menu" className="navbar-mobile-menu active">
         <ul className="nav-list">
           <li><Link to="/el-club">El club</Link></li>
           <li><Link to="/patrocinadores">Patrocinadores</Link></li>
