@@ -34,7 +34,7 @@ const Navbar = () => {
           <span id={"menu-toggler"}>Menú</span>
         </div>
       </nav>
-      <div id="navbar-mobile-menu" className="navbar-mobile-menu active">
+      <div id="navbar-mobile-menu" className="navbar-mobile-menu">
         <ul className="nav-list">
           <li><Link to="/el-club">El club</Link></li>
           <li><Link to="/patrocinadores">Patrocinadores</Link></li>

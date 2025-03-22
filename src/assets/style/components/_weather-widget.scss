@@ -7,14 +7,14 @@
   transform: translateY(-50%);
 
   @media screen and (max-width: $size-lg) {
-    top: 25%;
+    top: 15%;
   }
 
   span {
     margin: 0 15px;
 
     @media screen and (max-width: $size-md) {
-      font-size: $font-size-sm;
+      font-size: .5rem;
       margin: 0 5px;
     }
 
