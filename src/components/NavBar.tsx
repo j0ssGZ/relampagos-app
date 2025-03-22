@@ -4,22 +4,47 @@ import WeatherWidget from "./WeatherWidget.tsx";
 
 const Navbar = () => {
   return (
-    <nav className="navbar navbar-main">
-      <ul className="nav-list">
-        <li><Link to="/el-club">El club</Link></li>
-        <li><Link to="/patrocinadores">Patrocinadores</Link></li>
-        <li><Link to="/players">Players</Link></li>
-        <li>
+    <div>
+      <WeatherWidget/>
+      <nav className="navbar navbar-main">
+        <ul className="nav-list">
+          <li><Link to="/el-club">El club</Link></li>
+          <li><Link to="/patrocinadores">Patrocinadores</Link></li>
+          <li><Link to="/players">Players</Link></li>
+          <li>
+            <Link to="/">
+              <img src={logo} className="logo" alt="Relámpagos logo"/>
+            </Link>
+          </li>
+          <li><Link to="/players">Calendario</Link></li>
+          <li><Link to="/players">Tienda</Link></li>
+          <li><Link to="/players">Contacto</Link></li>
+        </ul>
+      </nav>
+      <nav className="navbar navbar-mobile">
+        <div className="navbar-mobile-item">
+          Área privada
+        </div>
+        <div className="navbar-mobile-item">
           <Link to="/">
             <img src={logo} className="logo" alt="Relámpagos logo"/>
           </Link>
-        </li>
-        <li><Link to="/players">Calendario</Link></li>
-        <li><Link to="/players">Tienda</Link></li>
-        <li><Link to="/players">Contacto</Link></li>
-      </ul>
-      <WeatherWidget />
-    </nav>
+        </div>
+        <div className="navbar-mobile-item">
+          <span id={"menu-toggler"}>Menú</span>
+        </div>
+      </nav>
+      <div className="navbar-mobile-menu">
+        <ul className="nav-list">
+          <li><Link to="/el-club">El club</Link></li>
+          <li><Link to="/patrocinadores">Patrocinadores</Link></li>
+          <li><Link to="/players">Players</Link></li>
+          <li><Link to="/players">Calendario</Link></li>
+          <li><Link to="/players">Tienda</Link></li>
+          <li><Link to="/players">Contacto</Link></li>
+        </ul>
+      </div>
+    </div>
   )
 }
 

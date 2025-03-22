@@ -20,7 +20,15 @@
       text-align: right;
       font-size: 4rem;
 
-      span {
+      @media screen and (max-width: $size-md) {
+        font-size: 2.75rem;
+      }
+
+      @media screen and (max-width: $size-lg) {
+        font-size: 3.5rem;
+      }
+
+      .sign {
         display: block;
         color: $primary-color;
         font-size: 1.5rem;
@@ -29,8 +37,6 @@
   }
 
   @media screen and (max-width: $size-sm) {
-    padding-top: 100px;
-
     .hero {
       .banner-text {
         font-size: 0.75rem;

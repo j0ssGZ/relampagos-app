@@ -29,12 +29,16 @@ export default tseslint.config(
       '@typescript-eslint/indent': ['error', 2],
       'linebreak-style': ['error', 'unix'],
       ...reactHooks.configs.recommended.rules,
+      ...react.configs.recommended.rules,
+      ...react.configs['jsx-runtime'].rules,
       'react-refresh/only-export-components': [
         'warn',
         { allowConstantExport: true },
       ],
-      ...react.configs.recommended.rules,
-      ...react.configs['jsx-runtime'].rules,
+
+      semi: ['error', 'never'],
+      'no-extra-semi': 'error',
+      'object-curly-spacing': ['error', 'always'],
     },
   },
 )
