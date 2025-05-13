@@ -7,8 +7,7 @@ import UnderConstruction from "./components/UnderConstruction.tsx";
 import { useState } from "react";
 
 function App() {
-  // const isDevelopment = process.env.NODE_ENV === 'development'
-  const showApp = useState(false)
+  const [showApp, setShowApp] = useState(true)
 
   return (
     <>
@@ -18,11 +17,12 @@ function App() {
             <Route path="/" element={<Layout />}>
               <Route index element={<Home />} />
               <Route path="el-club" element={<ElClub />} />
+              {/*<Route path="*" element={<PageNotFound />} />*/}
             </Route>
           </Routes>
         </BrowserRouter>
       ) : (
-        <UnderConstruction />
+        <UnderConstruction setShowApp={setShowApp} />
       )}
     </>
   )
