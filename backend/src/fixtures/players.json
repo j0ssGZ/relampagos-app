@@ -1,0 +1,47 @@
+[
+  {
+    "name": "Tato",
+    "games": 120,
+    "runs": 45,
+    "holdRuns": 3,
+    "birthDate": "1990-01-01T00:00:00",
+    "team": "Red Sox",
+    "position": "Pitcher"
+  },
+  {
+    "name": "Rubens",
+    "games": 130,
+    "runs": 50,
+    "holdRuns": 5,
+    "birthDate": "1991-02-15T00:00:00",
+    "team": "Yankees",
+    "position": "Catcher"
+  },
+  {
+    "name": "Ness",
+    "games": 140,
+    "runs": 55,
+    "holdRuns": 4,
+    "birthDate": "1989-07-23T00:00:00",
+    "team": "Dodgers",
+    "position": "Shortstop"
+  },
+  {
+    "name": "Natxo",
+    "games": 110,
+    "runs": 40,
+    "holdRuns": 2,
+    "birthDate": "1992-11-08T00:00:00",
+    "team": "Giants",
+    "position": "Outfielder"
+  },
+  {
+    "name": "Queco",
+    "games": 125,
+    "runs": 48,
+    "holdRuns": 6,
+    "birthDate": "1990-05-17T00:00:00",
+    "team": "Mets",
+    "position": "First Base"
+  }
+]

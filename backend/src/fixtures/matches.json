@@ -1,0 +1,16 @@
+[
+  {
+    "matchId": 1,
+    "teamA": "Relámpagos",
+    "teamB": "Cambre",
+    "startTime": "2023-10-14T10:00:00",
+    "endTime": "2023-10-14T11:30:00"
+  },
+  {
+    "matchId": 2,
+    "teamA": "Relámpagos",
+    "teamB": "Cambre",
+    "startTime": "2023-10-14T11:45:00",
+    "endTime": "2023-10-14T13:15:00"
+  }
+]
