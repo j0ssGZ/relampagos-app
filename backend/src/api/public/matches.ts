@@ -1,8 +1,8 @@
 import { Hono } from 'hono';
-import players from '../../fixtures/matches.json';
+import matches from '../../fixtures/matches.json';
 
 const router = new Hono();
 
-router.get('/', (c) => c.json(players));
+router.get('/', (c) => c.json(matches));
 
 export default router;
