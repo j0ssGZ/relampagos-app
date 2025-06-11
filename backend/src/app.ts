@@ -1,0 +1,21 @@
+import { Hono } from 'hono';
+import playersRoutes from './api/v1/players';
+import usersRoutes from './api/v1/users';
+import teamsRoutes from './api/v1/teams';
+import matchesRoutes from './api/v1/matches';
+import loginRoute from './api/login';
+import publicMatches from './api/public/matches';
+import publicTeams from './api/public/teams';
+
+const app = new Hono();
+
+app.get('/', (c) => c.text('Hello Hono!'));
+app.route('/login', loginRoute);
+app.route('/api/v1/players', playersRoutes);
+app.route('/api/v1/users', usersRoutes);
+app.route('/api/v1/teams', teamsRoutes);
+app.route('/api/v1/matches', matchesRoutes);
+app.route('/api/v1/public/matches', publicMatches);
+app.route('/api/v1/public/teams', publicTeams);
+
+export default app;
