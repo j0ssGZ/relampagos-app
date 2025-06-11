@@ -1,33 +1,27 @@
-# Ruta a los servicios
 FRONTEND_DIR=./frontend
 BACKEND_DIR=./backend
 
-# 🧩 Instalación de dependencias
 install:
 	cd $(FRONTEND_DIR) && bun install
 	cd $(BACKEND_DIR) && bun install
 
-# 🚀 Modo desarrollo (ejecuta ambos servicios en paralelo)
 dev:
-	@echo "🚀 Iniciando frontend y backend en modo desarrollo..."
+	@echo "Launching frontend and backend in dev mode"
 	@make -j2 frontend-dev backend-dev
 
-# 🚀 Modo desarrollo con Docker
-dev-docker:
-	docker-compose up --build
-
-# 🛠️ Build del frontend y backend
-build:
+build: install
 	cd $(FRONTEND_DIR) && bun run build
 	cd $(BACKEND_DIR) && bun run build
 
-# 🧼 Limpiar imágenes y contenedores de Docker
-clean:
-	docker-compose down -v --remove-orphans
+test:
+	@make -C $(BACKEND_DIR) test
+	@make -C $(FRONTEND_DIR) test
 
-# 🐳 Levantar sólo backend o frontend si se desea
 frontend-dev:
 	cd $(FRONTEND_DIR) && bun run dev
 
 backend-dev:
 	cd $(BACKEND_DIR) && bun run dev
+
+clean:
+	docker-compose down -v --remove-orphans
