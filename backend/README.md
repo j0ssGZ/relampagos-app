@@ -1,4 +1,5 @@
-# Relámpagos Backend
+<p align="center"><img src="../frontend/logo.png"/></p>
+<h1 align="center">Relámpagos Backend</h1>
 
 API construida con [Hono](https://hono.dev/) y ejecutada con Bun. Los datos se leen de ficheros JSON en `fixtures/` y la autenticación se basa en tokens JWT.
 
@@ -9,10 +10,12 @@ API construida con [Hono](https://hono.dev/) y ejecutada con Bun. Los datos se l
 La API quedará disponible en `http://localhost:3001`.
 
 ## Endpoints principales
+Todos los endpoints bajo `/api/v1` (excepto `/public`) requieren enviar un Bearer token.
+
 - `POST /login` -> devuelve un token JWT
-- `GET /api/v1/players` (requiere Bearer token)
-- `GET /api/v1/teams` (requiere Bearer token)
-- `GET /api/v1/matches` (requiere Bearer token)
+- `GET /api/v1/players`
+- `GET /api/v1/teams`
+- `GET /api/v1/matches`
 - Endpoints públicos sin auth en `/api/v1/public/*`
 
 Los métodos de escritura (`POST`, `PUT`, `DELETE`) están stubbed y requieren rol de `admin`.
