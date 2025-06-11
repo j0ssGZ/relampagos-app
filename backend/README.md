@@ -2,6 +2,7 @@
 <h1 align="center">Relámpagos Backend</h1>
 
 API construida con [Hono](https://hono.dev/) y ejecutada con Bun. Los datos se leen de ficheros JSON en `fixtures/` y la autenticación se basa en tokens JWT.
+> **Aviso:** las fixtures se usan solo de forma temporal. Cuando el Sr. Arepa Power lo decida, toda la información se migrará a una base de datos.
 
 ## Desarrollo rápido
 1. `bun install`
