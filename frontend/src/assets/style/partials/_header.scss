@@ -1,0 +1,26 @@
+@use '../shared/variables' as *;
+
+.header {
+  position: fixed;
+  width: 100%;
+  z-index: $zindex-1;
+
+  .logo {
+    height: 6em;
+    padding: 1em 1.5em 0;
+    will-change: filter;
+    transition: filter 300ms;
+  }
+
+  .logo:hover {
+    filter: drop-shadow(0 0 2em #e61919aa);
+  }
+
+  .logo.react:hover {
+    filter: drop-shadow(0 0 2em rgba(203, 46, 46, 0.67));
+  }
+
+  .card {
+    padding: 2em;
+  }
+}

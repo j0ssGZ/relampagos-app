@@ -1,0 +1,144 @@
+@use '../shared/variables' as *;
+
+.navbar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  position: relative;
+
+  &-main {
+    @media (max-width: $size-md) {
+      display: none;
+    }
+  }
+
+  // Mobile stuff
+  &-mobile {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    width: 100%;
+    align-items: center;
+    justify-items: center;
+    box-sizing: border-box;
+
+    &-item {
+      z-index: $zindex-4 + 2;
+
+      &:last-child {
+        justify-self: end;
+        padding: 1rem;
+      }
+    }
+
+    @media (min-width: $size-md) {
+      display: none;
+    }
+
+    .nav-list {
+      flex-direction: row;
+    }
+  }
+
+  // Mobile menu
+  &-mobile-menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100dvh;
+    overflow: hidden;
+    background-color: black;
+    z-index: $zindex-4 + 1;
+
+    @media (min-width: $size-md) {
+      display: none;
+    }
+
+    .stars-column {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 62px;
+      height: 100dvh;
+      background-image: url('../img/menu-mobile-stars.svg');
+      background-size: cover;
+      background-size: 75%;
+      background-repeat: no-repeat;
+      background-position: center;
+      background-color: #e51f20;
+    }
+
+    .nav-list {
+      flex-direction: column;
+      height: 100%;
+      padding: 2rem 2rem 2rem 30%;
+      align-items: start;
+      gap: .5rem;
+      position: relative;
+
+      li {
+        margin: 0;
+        width: 100%;
+      }
+
+      a {
+        color: $light-color;
+        font-size: 1.5rem;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+      }
+    }
+
+    .social-media-items {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 100px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      img {
+        width: 50px;
+      }
+    }
+  }
+}
+
+#menu-toggler {
+  display: block;
+  width: 50px;
+  height: 50px;
+
+  img {
+    position: absolute;
+    width: 50px;
+
+    &:nth-child(2) {
+      opacity: 0;
+    }
+  }
+}
+
+.nav-list {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+}
+
+.nav-list li {
+  margin: 0 10px;
+}
+
+.nav-list a {
+  color: $body-font-color;
+  text-decoration: none;
+  font-size: 18px;
+  letter-spacing: 0.25px;
+}

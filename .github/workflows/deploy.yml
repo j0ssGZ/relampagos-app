@@ -1,0 +1,171 @@
+name: Deploy
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Setup Bun
+      uses: oven-sh/setup-bun@v1
+      with:
+        bun-version: latest
+
+    - name: Install dependencies (Backend)
+      run: |
+        cd backend
+        bun install
+
+    - name: Install dependencies (Frontend)
+      run: |
+        cd frontend
+        bun install
+
+    - name: Run tests (Backend)
+      run: |
+        cd backend
+        bun test
+      continue-on-error: true
+
+    - name: Run tests (Frontend)
+      run: |
+        cd frontend
+        bun test
+      continue-on-error: true
+
+  build:
+    needs: test
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/master'
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Setup Bun
+      uses: oven-sh/setup-bun@v1
+      with:
+        bun-version: latest
+
+    - name: Install dependencies (Backend)
+      run: |
+        cd backend
+        bun install
+
+    - name: Install dependencies (Frontend)
+      run: |
+        cd frontend
+        bun install
+
+    - name: Build Frontend
+      run: |
+        cd frontend
+        bun run build
+
+    - name: Upload Frontend Build
+      uses: actions/upload-artifact@v4
+      with:
+        name: frontend-build
+        path: frontend/dist/
+
+    - name: Upload Backend Source
+      uses: actions/upload-artifact@v4
+      with:
+        name: backend-source
+        path: backend/
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/master'
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Download Frontend Build
+      uses: actions/download-artifact@v4
+      with:
+        name: frontend-build
+        path: frontend/dist/
+
+    - name: Download Backend Source
+      uses: actions/download-artifact@v4
+      with:
+        name: backend-source
+        path: backend/
+
+    - name: Setup SSH
+      uses: webfactory/ssh-agent@v0.8.0
+      with:
+        ssh-private-key: ${{ secrets.DO_SSH_KEY }}
+
+    - name: Add server to known hosts
+      run: |
+        ssh-keyscan -H ${{ secrets.DO_SSH_HOST }} >> ~/.ssh/known_hosts
+
+    - name: Deploy to Droplet
+      run: |
+        # Crear directorios temporales en el servidor
+        ssh ${{ secrets.DO_SSH_USER }}@${{ secrets.DO_SSH_HOST }} "mkdir -p /tmp/relampagos-deploy/frontend /tmp/relampagos-deploy/backend /tmp/relampagos-deploy/config"
+
+        # Subir archivos del frontend
+        scp -r frontend/dist/* ${{ secrets.DO_SSH_USER }}@${{ secrets.DO_SSH_HOST }}:/tmp/relampagos-deploy/frontend/
+
+        # Subir archivos del backend
+        scp -r backend/* ${{ secrets.DO_SSH_USER }}@${{ secrets.DO_SSH_HOST }}:/tmp/relampagos-deploy/backend/
+
+        # Subir archivos de configuración
+        scp -r config/* ${{ secrets.DO_SSH_USER }}@${{ secrets.DO_SSH_HOST }}:/tmp/relampagos-deploy/config/
+
+        # Ejecutar script de deploy en el servidor
+        ssh ${{ secrets.DO_SSH_USER }}@${{ secrets.DO_SSH_HOST }} "
+          # Instalar Bun globalmente si no está instalado
+          if ! command -v bun &> /dev/null; then
+            curl -fsSL https://bun.sh/install | bash
+            export PATH=\"\$HOME/.bun/bin:\$PATH\"
+            # Crear symlink global
+            sudo ln -sf \$HOME/.bun/bin/bun /usr/bin/bun
+          fi
+
+          # Crear directorio de la aplicación si no existe
+          sudo mkdir -p /var/www/html/relampagos/frontend
+          sudo mkdir -p /var/www/html/relampagos/backend
+
+          # Copiar archivos del frontend
+          sudo cp -r /tmp/relampagos-deploy/frontend/* /var/www/html/relampagos/frontend/
+
+          # Copiar archivos del backend
+          sudo cp -r /tmp/relampagos-deploy/backend/* /var/www/html/relampagos/backend/
+          sudo chown -R www-data:www-data /var/www/html/relampagos/backend
+
+          # Instalar dependencias del backend
+          cd /var/www/html/relampagos/backend
+          sudo -u www-data bun install --production
+
+          # Configurar y reiniciar servicio del backend
+          sudo cp /tmp/relampagos-deploy/config/relampagos-backend.service /etc/systemd/system/
+          sudo systemctl daemon-reload
+          sudo systemctl enable relampagos-backend.service
+          sudo systemctl restart relampagos-backend.service
+
+          # Copiar configuraciones de nginx (usando el nombre correcto)
+          sudo cp /tmp/relampagos-deploy/config/relampagos.conf /etc/nginx/sites-available/relampagos.conf
+
+          # Crear symlink si no existe
+          sudo ln -sf /etc/nginx/sites-available/relampagos.conf /etc/nginx/sites-enabled/
+
+          # Verificar configuración de nginx
+          sudo nginx -t
+
+          # Recargar nginx
+          sudo systemctl reload nginx
+
+          # Limpiar archivos temporales
+          rm -rf /tmp/relampagos-deploy
+        "
