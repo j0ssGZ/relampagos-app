@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 
-interface WeatherWidgetProps {
-  lat: number;
-  lon: number;
-  apiKey: string;
-}
+// interface WeatherWidgetProps {
+//   lat: number;
+//   lon: number;
+//   apiKey: string;
+// }
 
-const WeatherWidget = ({ lat = 42.43, lon = -8.64, apiKey = "2b5194b98a7448f8a1805647252306" }: WeatherWidgetProps) => {
+const WeatherWidget = () => {
   const [weatherData, setWeatherData] = useState<any>(null);
   const [localTime, setLocalTime] = useState(new Date());
 
@@ -15,6 +15,10 @@ const WeatherWidget = ({ lat = 42.43, lon = -8.64, apiKey = "2b5194b98a7448f8a18
     const timer = setInterval(() => setLocalTime(new Date()), 1000);
     return () => clearInterval(timer);
   }, []);
+
+  const lat = 42.43 // this is harcoded for test
+  const lon = -8.64
+  const apiKey = "2b5194b98a7448f8a1805647252306"
 
   useEffect(() => {
     fetch(
