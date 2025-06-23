@@ -12,10 +12,20 @@ const Navbar = () => {
     const menuMobileToggler = document.querySelector('#menu-mobile-toggler')
     const navbarMobileLink = document.querySelector('#navbar-mobile-menu .nav-list a')
     const topLogo = document.querySelector('.navbar-mobile-item > a')
+    const menuElement = document.querySelector<HTMLElement>('#navbar-mobile-menu');
+
+    let openMenu = false;
+    if (menuElement) menuElement.style.display = "none";
 
     const showMenuAnimation = anime.timeline({
       easing: "easeOutCubic",
-      autoplay: false
+      autoplay: false,
+      begin: () => {
+        if (menuElement) menuElement.style.display = "block";
+      },
+      complete: () => {
+        if (!openMenu && menuElement) menuElement.style.display = "none";
+      }
     })
 
     showMenuAnimation
@@ -67,6 +77,7 @@ const Navbar = () => {
       )
 
     menuMobileToggler?.addEventListener("click", () => {
+      openMenu = !openMenu;
       if (showMenuAnimation.began) {
         showMenuAnimation.reverse()
         showMenuAnimation.play()
@@ -97,7 +108,7 @@ const Navbar = () => {
     navbarMobileLink?.addEventListener("click", closeMenuEventListener)
     topLogo?.addEventListener("click", closeMenuEventListener)
   })
-  
+
   return (
     <div>
       <WeatherWidget/>

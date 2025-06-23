@@ -9,7 +9,7 @@ WorkingDirectory=/var/www/html/relampagos/backend
 ExecStart=/usr/bin/bun index.js
 Restart=always
 RestartSec=10
-Environment=NODE_ENV=production
+Environment=NODE_ENV=prod
 Environment=PORT=3001
 Environment=PATH=/usr/bin:/usr/local/bin:/home/www-data/.bun/bin
 

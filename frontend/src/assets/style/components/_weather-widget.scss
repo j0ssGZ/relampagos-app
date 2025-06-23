@@ -10,18 +10,42 @@
     top: 15%;
   }
 
+  img {
+    width: 20px;
+    height: 20px;
+    filter: grayscale(100%) brightness(0) invert(0);
+    position: relative;
+    right: 0.5rem;
+    top: 0.25rem;
+
+    @media screen and (max-width: $size-md) {    width: 10px;
+      height: 10px;
+      position: relative;
+      top: 0;
+    }
+
+    @media screen and (max-width: $size-sm) {
+      margin: 0 2.5px;
+      right: 0.15rem;
+    }
+  }
+
   span {
     margin: 0 15px;
+
+    @media screen and (max-width: $size-lg) {
+      &:last-child {
+        margin-right: 0;
+      }
+    }
 
     @media screen and (max-width: $size-md) {
       font-size: .5rem;
       margin: 0 5px;
     }
 
-    @media screen and (max-width: $size-lg) {
-      &:last-child {
-        margin-right: 0;
-      }
+    @media screen and (max-width: $size-sm) {
+      margin: 0 2.5px;
     }
   }
 }

@@ -1,8 +1,115 @@
+@use '../shared/variables' as *;
+
 .matchs-banner {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
   position: absolute;
   bottom: 0;
-  width: 100%;
   left: 0;
-  height: 150px;
-  background-color: rgba(0, 0, 0, 0.5);
+
+  @media screen and (min-width: $size-md) {
+    padding: $page-padding;
+  }
+
+  &__container {
+    width: 90%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+  }
+
+  &__container__content {
+    display: flex;
+    align-items: stretch;
+    width: 100%;
+    position: relative;
+  }
+
+  .carousel-arrow {
+    background: none;
+    border: none;
+    font-size: 2.5rem;
+    cursor: pointer;
+    color: #000;
+    z-index: 2;
+    align-self: center;
+    transition: color 0.2s;
+
+    &:hover {
+      color: #e53935;
+    }
+
+    &.left {
+      margin-right: 1rem;
+    }
+
+    &.right {
+      margin-left: 1rem;
+    }
+  }
+
+  .match-day {
+    margin: 0 1rem 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    box-sizing: border-box;
+    display: none;
+
+    &:nth-child(1) {
+      display: flex;
+    }
+
+    @media screen and (min-width: $size-sm) {
+      &:nth-child(1),
+      &:nth-child(2) {
+        display: flex;
+      }
+    }
+  }
+
+  .match-day__container__title {
+    margin-bottom: 1rem;
+    display: block;
+    border-bottom: 2px $primary-color solid;;
+
+    h1 {
+      font-weight: normal;
+      margin: 0;
+      background: $primary-color;
+      color: #fff;
+      font-size: 1rem;
+      padding: .2rem .5rem 0;
+      display: inline;
+    }
+  }
+
+  .match-day__container__matches {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .match-day__row {
+    display: flex;
+    align-items: center;
+    font-size: 0.8rem;
+    margin-bottom: 0.3rem;
+
+    .match-day__time {
+      margin-right: 1.5rem;
+    }
+
+    .match-day__teams {
+
+      .highlight {
+        background: #e53935;
+        color: #fff;
+        padding: 0 0.3em;
+        margin: 0 0.1em;
+      }
+    }
+  }
 }
