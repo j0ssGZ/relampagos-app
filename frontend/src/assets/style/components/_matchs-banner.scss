@@ -16,15 +16,29 @@
   &__container {
     width: 90%;
     display: flex;
-    justify-content: center;
     align-items: flex-end;
   }
 
   &__container__content {
     display: flex;
-    align-items: stretch;
+    align-items: center;
+    justify-content: center;
     width: 100%;
     position: relative;
+  }
+
+  &__stars {
+    width: 100px;
+    margin: 0 1rem;
+    display: none;
+
+    @media screen and (min-width: $size-sm) {
+      display: flex;
+    }
+
+    img {
+      width: 100%;
+    }
   }
 
   .carousel-arrow {
@@ -36,6 +50,7 @@
     z-index: 2;
     align-self: center;
     transition: color 0.2s;
+    width: 50px;
 
     &:hover {
       color: #e53935;
@@ -50,21 +65,22 @@
     }
   }
 
-  .match-day {
+  > .match-day {
     margin: 0 1rem 1rem;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     box-sizing: border-box;
     display: none;
+    align-self: flex-start;
 
-    &:nth-child(1) {
+    &:nth-of-type(1) {
       display: flex;
     }
 
     @media screen and (min-width: $size-sm) {
-      &:nth-child(1),
-      &:nth-child(2) {
+      &:nth-of-type(1),
+      &:nth-of-type(2) {
         display: flex;
       }
     }
@@ -84,12 +100,6 @@
       padding: .2rem .5rem 0;
       display: inline;
     }
-  }
-
-  .match-day__container__matches {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
   }
 
   .match-day__row {

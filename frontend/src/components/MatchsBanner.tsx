@@ -1,4 +1,6 @@
 import { useState } from "react";
+import threeStars from '../assets/img/three-stars.svg';
+import React from "react";
 
 type Match = {
   time: string;
@@ -48,7 +50,7 @@ const MatchDay = ({ date, day, matches }: MatchDayProps) => (
 // Datos de ejemplo
 const matchDays = [
   {
-    date: "03/06/23",
+    date: "07/06/25",
     day: "SÁBADO",
     matches: [
       { time: "15:00 H", teams: "CBS. CAMBRE VS RELÁMPAGOS PONTEVEDRA", highlight: "RELÁMPAGOS PONTEVEDRA" },
@@ -56,11 +58,18 @@ const matchDays = [
     ]
   },
   {
-    date: "04/06/23",
+    date: "28/06/25",
     day: "DOMINGO",
     matches: [
       { time: "15:00 H", teams: "CBS. CAMBRE VS RELÁMPAGOS PONTEVEDRA", highlight: "RELÁMPAGOS PONTEVEDRA" },
       { time: "16:45 H", teams: "RELÁMPAGOS PONTEVEDRA VS ATLANTA SHOCKS", highlight: "RELÁMPAGOS PONTEVEDRA" }
+    ]
+  },
+  {
+    date: "05/07/25",
+    day: "SÁBADO",
+    matches: [
+      { time: "11:30 H", teams: "CBS. TRASNOS VS RELÁMPAGOS PONTEVEDRA", highlight: "RELÁMPAGOS PONTEVEDRA" },
     ]
   },
 ]
@@ -75,20 +84,27 @@ const MatchsBanner = () => {
   return (
     <div className="matchs-banner">
       <div className="matchs-banner__container">
-        <div className="matchs-banner__container__content" style={{ display: "flex", alignItems: "stretch" }}>
-          {start > 0 && (
+        <div className="matchs-banner__container__content">
             <button className="carousel-arrow left" onClick={handlePrev}>
-              &#8592;
+              {start > 0 && (
+                <span>&#8592;</span>
+              )}
             </button>
-          )}
           {matchDays.slice(start, start + visible).map((day, idx) => (
-            <MatchDay key={day.date + idx} {...day} />
+            <React.Fragment key={day.date + idx}>
+              <MatchDay {...day} />
+              {idx < visible - 1 && start + idx + 1 < matchDays.length && (
+                <div className="matchs-banner__stars">
+                  <img src={threeStars} alt="Estrellas" />
+                </div>
+              )}
+            </React.Fragment>
           ))}
-          {start + visible < matchDays.length && (
-            <button className="carousel-arrow right" onClick={handleNext}>
-              &#8594;
-            </button>
-          )}
+          <button className="carousel-arrow right" onClick={handleNext}>
+            {start + visible < matchDays.length && (
+              <span>&#8594;</span>
+            )}
+          </button>
         </div>
       </div>
     </div>

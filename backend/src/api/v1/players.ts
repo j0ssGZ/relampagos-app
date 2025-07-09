@@ -1,8 +1,14 @@
 import { Hono } from 'hono';
-import players from '../../fixtures/players.json';
+import { FilePlayerRepository } from '../../contexts/players/infra/repositories/FilePlayerRepository';
+import { GetAllPlayersUseCase } from '../../contexts/players/application/GetAllPlayersUseCase';
 
 const router = new Hono();
+const playerRepository = new FilePlayerRepository();
+const getAllPlayersUseCase = new GetAllPlayersUseCase(playerRepository);
 
-router.get('/', (c) => c.json(players));
+router.get('/', async (c) => {
+  const players = await getAllPlayersUseCase.execute();
+  return c.json(players);
+});
 
 export default router;
